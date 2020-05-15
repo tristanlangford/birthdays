@@ -5,28 +5,40 @@ class Birthday_list
     @friends = []
   end
 
-  def add_freind(name, birthday, age)
-    @friends.push({name: name, birthday: birthday, age: age})
+  def add_freind(name, birthday)
+    @friends.push({name: name, date_of_birth: birthday})
   end
 
   def show_all
-    @friends.each { |friend| puts "#{friend[:name]}: #{friend[:birthday]}"}
-  end
-
-  def today
-    Time.now.strftime("%d %B")
+    @friends.each { |friend| puts "#{friend[:name]}: #{friend[:date_of_birth]}"}
   end
 
   def birthday_today?
-    @friends.each { |friend| birthday_message(friend) if friend[:birthday] == today }
+    @friends.each { |friend| birthday_message(friend) if format_date(string_to_date(friend)) == today }
   end
 
   def birthday_message(friend)
-    update_age(friend)
-    puts "It's #{friend[:name]}'s birthday today! They are #{friend[:age]} years old!"
+    #update_age(friend)
+    puts "It's #{friend[:name]}'s birthday today! They are #{age(friend)} years old!"
   end
 
-  def update_age(friend)
-    friend[:age] = friend[:age] + 1
+
+  private
+
+  def string_to_date(friend)
+    Time.parse(friend[:date_of_birth])
   end
+
+  def today
+    format_date(Time.now)
+  end
+
+  def age(friend)
+    Time.now.year - string_to_date(friend).year
+  end
+
+  def format_date(time)
+    time.strftime("%d %B")
+  end
+
 end
