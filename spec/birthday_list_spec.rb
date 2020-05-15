@@ -1,7 +1,7 @@
 require 'birthday_list.rb'
 
-describe Friend do
-  subject {Friend.new}
+describe Birthday_list do
+  subject {Birthday_list.new}
 
   it 'responds to add_friend method' do
     expect(subject).to respond_to(:add_freind).with(3).arguments
@@ -18,5 +18,20 @@ describe Friend do
     subject.add_freind("Tim", "31 January", 12)
     expect{subject.show_all}.to output("Jane: 1 January\nTim: 31 January\n").to_stdout
   end
+
+  it 'can tell what date today is' do
+    expect(subject.today).to eq(Time.new.strftime("%d %b"))
+  end
+
+  it 'outputs a string when it is someones birthday' do
+    subject.add_freind("Jane", "1 January", 24)
+    allow(subject).to receive(:today) {"1 January"}
+    expect{subject.birthday_today?}.to output("It's Jane's birthday today! They are 25 years old!\n").to_stdout
+  end
+
+  it 'updates age when its their birthday' do
+
+  end 
+
 
 end
