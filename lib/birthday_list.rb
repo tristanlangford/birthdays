@@ -14,7 +14,7 @@ class Birthday_list
   end
 
   def today
-    Time.new.strftime("%d %b")
+    Time.now.strftime("%d %B")
   end
 
   def birthday_today?
