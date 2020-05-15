@@ -22,7 +22,11 @@ class Birthday_list
   end
 
   def birthday_message(friend)
-    puts "It's #{friend[:name]}'s birthday today! They are #{friend[:age] + 1} years old!"
+    update_age(friend)
+    puts "It's #{friend[:name]}'s birthday today! They are #{friend[:age]} years old!"
   end
 
+  def update_age(friend)
+    friend[:age] = friend[:age] + 1
+  end
 end
